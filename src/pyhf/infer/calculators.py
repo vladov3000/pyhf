@@ -116,7 +116,7 @@ class AsymptoticCalculator(object):
             pdf (~pyhf.pdf.Model): The statistical model adhering to the schema ``model.json``.
             init_pars (`tensor`): The initial parameter values to be used for fitting.
             par_bounds (`tensor`): The parameter value bounds to be used for fitting.
-            qtilde (`bool`): Whether to use qtilde as the test statistic.
+            qtilde (Bool): When ``True`` perform the calculation using the alternative test statistic, :math:`\tilde{q}`, as defined in Equation (62) of :xref:`arXiv:1007.1727`
 
         Returns:
             ~pyhf.infer.calculators.AsymptoticCalculator: The calculator for asymptotic quantities.
@@ -253,7 +253,6 @@ class ToyCalculator(object):
         pdf,
         init_pars=None,
         par_bounds=None,
-        qtilde=False,
         ntoys=2000,
         track_progress=True,
     ):
@@ -265,7 +264,6 @@ class ToyCalculator(object):
             pdf (~pyhf.pdf.Model): The statistical model adhering to the schema ``model.json``.
             init_pars (`tensor`): The initial parameter values to be used for fitting.
             par_bounds (`tensor`): The parameter value bounds to be used for fitting.
-            qtilde (`bool`): Whether to use qtilde as the test statistic.
             ntoys (`int`): Number of toys to use (how many times to sample the underlying distributions)
             track_progress (`bool`): Whether to display the `tqdm` progress bar or not (outputs to `stderr`)
 

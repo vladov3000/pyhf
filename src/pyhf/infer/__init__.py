@@ -11,7 +11,6 @@ def hypotest(
     pdf,
     init_pars=None,
     par_bounds=None,
-    qtilde=False,
     calctype='asymptotics',
     **kwargs,
 ):
@@ -80,9 +79,14 @@ def hypotest(
     """
     init_pars = init_pars or pdf.config.suggested_init()
     par_bounds = par_bounds or pdf.config.suggested_bounds()
+    qtilde = kwargs.pop('qtilde', False)
+    return_tail_probs = kwargs.pop('return_tail_probs', False)
+    return_expected_set = kwargs.pop('return_expected_set', False)
+    return_expected = kwargs.pop('return_expected', False)
+
     tensorlib, _ = get_backend()
 
-    calc = create_calculator(calctype, data, pdf, init_pars, par_bounds, qtilde=qtilde)
+    calc = create_calculator(calctype, data, pdf, init_pars, par_bounds, **kwargs)
     teststat = calc.teststatistic(poi_test)
     sig_plus_bkg_distribution, b_only_distribution = calc.distributions(poi_test)
 
@@ -96,9 +100,9 @@ def hypotest(
     )
 
     _returns = [CLs]
-    if kwargs.get('return_tail_probs'):
+    if return_tail_probs:
         _returns.append([CLsb, CLb])
-    if kwargs.get('return_expected_set'):
+    if return_expected_set:
         CLs_exp = []
         for n_sigma in [2, 1, 0, -1, -2]:
             CLs = sig_plus_bkg_distribution.pvalue(
@@ -106,10 +110,10 @@ def hypotest(
             ) / b_only_distribution.pvalue(n_sigma)
             CLs_exp.append(tensorlib.reshape(CLs, (1,)))
         CLs_exp = tensorlib.astensor(CLs_exp)
-        if kwargs.get('return_expected'):
+        if return_expected:
             _returns.append(CLs_exp[2])
         _returns.append(CLs_exp)
-    elif kwargs.get('return_expected'):
+    elif return_expected:
         n_sigma = 0
         CLs = sig_plus_bkg_distribution.pvalue(n_sigma) / b_only_distribution.pvalue(
             n_sigma
