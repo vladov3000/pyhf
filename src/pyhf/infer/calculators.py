@@ -99,7 +99,7 @@ class AsymptoticCalculator(object):
             pdf (~pyhf.pdf.Model): The statistical model adhering to the schema ``model.json``.
             init_pars (`tensor`): The initial parameter values to be used for fitting.
             par_bounds (`tensor`): The parameter value bounds to be used for fitting.
-            qtilde (Bool): When ``True`` perform the calculation using the alternative test statistic, :math:`\tilde{q}`, as defined in Equation (62) of :xref:`arXiv:1007.1727`
+            qtilde (Bool): When ``True`` perform the calculation using the alternative test statistic, :math:`\\tilde{q}`, as defined in Equation (62) of :xref:`arXiv:1007.1727`.
 
         Returns:
             ~pyhf.infer.calculators.AsymptoticCalculator: The calculator for asymptotic quantities.
