@@ -295,22 +295,20 @@ class ToyCalculator(object):
             unit='toy',
         )
 
-        signal_qtilde = []
+        signal_test_stat = []
         for sample in tqdm.tqdm(signal_sample, **tqdm_options, desc='Signal-like'):
-            signal_qtilde.append(
+            signal_test_stat.append(
                 qmu(poi_test, sample, self.pdf, signal_pars, self.par_bounds)
             )
-        signal_qtilde = tensorlib.astensor(signal_qtilde)
 
-        bkg_qtilde = []
+        bkg_test_stat = []
         for sample in tqdm.tqdm(bkg_sample, **tqdm_options, desc='Background-like'):
-            bkg_qtilde.append(
+            bkg_test_stat.append(
                 qmu(poi_test, sample, self.pdf, bkg_pars, self.par_bounds)
             )
-        bkg_qtilde = tensorlib.astensor(bkg_qtilde)
 
-        s_plus_b = EmpiricalDistribution(signal_qtilde)
-        b_only = EmpiricalDistribution(bkg_qtilde)
+        s_plus_b = EmpiricalDistribution(tensorlib.astensor(signal_test_stat))
+        b_only = EmpiricalDistribution(tensorlib.astensor(bkg_test_stat))
         return s_plus_b, b_only
 
     def teststatistic(self, poi_test):
