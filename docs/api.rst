@@ -126,7 +126,10 @@ Inference
    mle.fixed_poi_fit
    calculators.generate_asimov_data
    calculators.AsymptoticTestStatDistribution
+   calculators.EmpiricalDistribution
    calculators.AsymptoticCalculator
+   calculators.ToyCalculator
+   utils.create_calculator
 
 Exceptions
 ----------
