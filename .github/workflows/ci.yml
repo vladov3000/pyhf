@@ -76,9 +76,8 @@ jobs:
         python -m pip install --ignore-installed -U -q --no-cache-dir -e .[complete]
         python -m pip list
     - name: Test example notebooks
-      if: github.event_name == 'schedule'
       run: |
-        python -m pytest -r sx tests/test_notebooks.py
+        python -m pytest -m "not slow" -r sx tests/test_notebooks.py
 
   docs:
 
