@@ -10,6 +10,24 @@ def create_calculator(calctype, *args, **kwargs):
 
     See :py:class:`~pyhf.infer.calculators.AsymptoticCalculator` and :py:class:`~pyhf.infer.calculators.ToyCalculator` on additional arguments to be specified.
 
+    Example:
+
+        >>> import pyhf
+        >>> import numpy.random as random
+        >>> random.seed(0)
+        >>> model = pyhf.simplemodels.hepdata_like(
+        ...     signal_data=[12.0, 11.0], bkg_data=[50.0, 52.0], bkg_uncerts=[3.0, 7.0],
+        ... )
+        >>> observations = [51, 48]
+        >>> data = observations + model.config.auxdata
+        >>> mu_test = 1.0
+        >>> toy_calculator = pyhf.infer.utils.create_calculator(
+        ...     "toybased", data, model, ntoys=100, track_progress=False
+        ... )
+        >>> qmu_sig, qmu_bkg = toy_calculator.distributions(mu_test)
+        >>> qmu_sig.pvalue(mu_test), qmu_bkg.pvalue(mu_test)
+        (0.14, 0.76)
+
     Args:
         calctype (`str`): The calculator to create. Choose either 'asymptotics' or 'toybased'.
 
@@ -34,6 +52,27 @@ def hypotest(
     Compute :math:`p`-values and test statistics for a single value of the parameter of interest.
 
     See :py:class:`~pyhf.infer.calculators.AsymptoticCalculator` and :py:class:`~pyhf.infer.calculators.ToyCalculator` on additional keyword arguments to be specified.
+
+    Example:
+
+        >>> import pyhf
+        >>> model = pyhf.simplemodels.hepdata_like(
+        ...     signal_data=[12.0, 11.0], bkg_data=[50.0, 52.0], bkg_uncerts=[3.0, 7.0]
+        ... )
+        >>> observations = [51, 48]
+        >>> data = observations + model.config.auxdata
+        >>> mu_test = 1.0
+        >>> CLs_obs, CLs_exp_band = pyhf.infer.hypotest(
+        ...     mu_test, data, model, return_expected_set=True
+        ... )
+        >>> CLs_obs
+        array([0.05290116])
+        >>> CLs_exp_band
+        array([[0.00260641],
+               [0.01382066],
+               [0.06445521],
+               [0.23526104],
+               [0.57304182]])
 
     Args:
         poi_test (Number or Tensor): The value of the parameter of interest (POI)
