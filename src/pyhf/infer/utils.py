@@ -80,13 +80,13 @@ def hypotest(
         pdf (~pyhf.pdf.Model): The HistFactory statistical model
         init_pars (Array or Tensor): The initial parameter values to be used for minimization
         par_bounds (Array or Tensor): The parameter value bounds to be used for minimization
-        qtilde (Bool): When ``True`` perform the calculation using the alternative test statistic, :math:`\tilde{q}`, as defined in Equation (62) of :xref:`arXiv:1007.1727`
+        qtilde (`bool`): When ``True`` perform the calculation using the alternative test statistic, :math:`\tilde{q}`, as defined in Equation (62) of :xref:`arXiv:1007.1727`
         calctype (`str`): The calculator to create. Choose either 'asymptotics' (default) or 'toybased'.
 
     Keyword Args:
-        return_tail_probs (bool): Bool for returning :math:`\textrm{CL}_{s+b}` and :math:`\textrm{CL}_{b}`
-        return_expected (bool): Bool for returning :math:`\textrm{CL}_{\textrm{exp}}`
-        return_expected_set (bool): Bool for returning the :math:`(-2,-1,0,1,2)\sigma` :math:`\textrm{CL}_{\textrm{exp}}` --- the "Brazil band"
+        return_tail_probs (`bool`): Bool for returning :math:`\textrm{CL}_{s+b}` and :math:`\textrm{CL}_{b}`
+        return_expected (`bool`): Bool for returning :math:`\textrm{CL}_{\textrm{exp}}`
+        return_expected_set (`bool`): Bool for returning the :math:`(-2,-1,0,1,2)\sigma` :math:`\textrm{CL}_{\textrm{exp}}` --- the "Brazil band"
 
     Returns:
         Tuple of Floats and lists of Floats:
