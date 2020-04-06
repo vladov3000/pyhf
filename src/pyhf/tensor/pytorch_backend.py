@@ -211,6 +211,7 @@ class pytorch_backend(object):
 
         """
         # TODO: Adopt PyTorch native implimentation when available
+        # c.f. https://github.com/pytorch/pytorch/issues/35977
         import numpy as np
 
         np_result = np.percentile(
