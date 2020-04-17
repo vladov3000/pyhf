@@ -7,7 +7,7 @@ extras_require = {
         'tensorflow-probability~=0.10',  # TODO: Temp patch until tfp v0.11
     ],
     'torch': ['torch~=1.2'],
-    'jax': ['jax~=0.1,>0.1.51', 'jaxlib~=0.1,>0.1.33'],
+    'jax': ['jax~=0.1,>=0.1.63', 'jaxlib~=0.1,>=0.1.44'],
     'xmlio': ['uproot~=3.6'],  # Future proof against uproot4 API changes
     'minuit': ['iminuit'],
 }

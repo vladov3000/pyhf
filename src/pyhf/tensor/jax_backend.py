@@ -233,7 +233,6 @@ class jax_backend(object):
             JAX ndarray: The value of the :math:`q`-th percentile of the tensor along the specified axis.
 
         """
-        # TODO: https://github.com/google/jax/issues/2607
         return np.percentile(tensor_in, q, axis=axis, interpolation=interpolation)
 
     def stack(self, sequence, axis=0):
