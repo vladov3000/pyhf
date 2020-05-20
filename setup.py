@@ -28,7 +28,7 @@ extras_require['test'] = sorted(
         + extras_require['xmlio']
         + extras_require['contrib']
         + [
-            'pyflakes',
+            'flake8',
             'pytest~=3.5',
             'pytest-cov>=2.5.1',
             'pytest-mock',
