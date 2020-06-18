@@ -13,6 +13,14 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install --ignore-installed -U -q --no-cache-dir -e .[test]
       - name: Lint Code Base
         uses: github/super-linter@v2.0.0
         env:
