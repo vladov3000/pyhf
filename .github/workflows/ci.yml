@@ -10,6 +10,7 @@ on:
 jobs:
   test:
 
+    if: github.event_name == matrix.event-name || github.event_name == 'schedule'
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
