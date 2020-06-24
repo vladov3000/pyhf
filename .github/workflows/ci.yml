@@ -22,7 +22,9 @@ jobs:
             event-name: push
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      if: ${{ github.event_name == matrix.event-name }} || github.event_name == 'schedule'
+      uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       if: ${{ github.event_name == matrix.event-name }} || github.event_name == 'schedule'
       uses: actions/setup-python@v2
