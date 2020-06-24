@@ -15,11 +15,11 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         python-version: [3.6, 3.7, 3.8]
-        event-name: pull_request
+        event-name: [pull_request]
         include:
           - os: ubuntu-latest
             python-version: 3.8
-            event-name: push
+            event-name: [push]
 
     steps:
     - uses: actions/checkout@v2
