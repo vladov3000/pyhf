@@ -29,6 +29,9 @@ jobs:
         python -m pip install --upgrade pip setuptools wheel
         python -m pip install --ignore-installed -U -q --no-cache-dir -e .[test]
         python -m pip list
+    - name: Check what branches are available
+      run: |
+        git branch -a
     - name: Test with pytest
       run: |
         python -m pytest -r sx --picked=first --mode=branch --ignore tests/benchmarks/ --ignore tests/contrib --ignore tests/test_notebooks.py
