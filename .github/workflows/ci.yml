@@ -27,6 +27,10 @@ jobs:
         python -m pip install --upgrade pip setuptools wheel
         python -m pip install --ignore-installed -U -q --no-cache-dir -e .[test]
         python -m pip list
+    - name: Run tests for changed files first
+      if: matrix.python-version == 3.8 && matrix.os == 'ubuntu-latest'
+      run: |
+        python -m pytest --picked --mode=branch
     - name: Test with pytest
       run: |
         python -m pytest -r sx --ignore tests/benchmarks/ --ignore tests/contrib --ignore tests/test_notebooks.py
