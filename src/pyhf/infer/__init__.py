@@ -102,11 +102,6 @@ def hypotest(
     CLsb = sig_plus_bkg_distribution.pvalue(teststat)
     CLb = b_only_distribution.pvalue(teststat)
     CLs = CLsb / CLb
-    CLsb, CLb, CLs = (
-        tensorlib.reshape(CLsb, (1,)),
-        tensorlib.reshape(CLb, (1,)),
-        tensorlib.reshape(CLs, (1,)),
-    )
 
     _returns = [CLs]
     if kwargs.get('return_tail_probs'):
@@ -117,7 +112,7 @@ def hypotest(
             CLs = sig_plus_bkg_distribution.pvalue(
                 n_sigma
             ) / b_only_distribution.pvalue(n_sigma)
-            CLs_exp.append(tensorlib.reshape(CLs, (1,)))
+            CLs_exp.append(CLs)
         CLs_exp = tensorlib.astensor(CLs_exp)
         if kwargs.get('return_expected'):
             _returns.append(CLs_exp[2])
@@ -127,7 +122,7 @@ def hypotest(
         CLs = sig_plus_bkg_distribution.pvalue(n_sigma) / b_only_distribution.pvalue(
             n_sigma
         )
-        _returns.append(tensorlib.reshape(CLs, (1,)))
+        _returns.append(CLs)
     # Enforce a consistent return type of the observed CLs
     return tuple(_returns) if len(_returns) > 1 else _returns[0]
 
