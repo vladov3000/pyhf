@@ -5,6 +5,7 @@ config.update('jax_enable_x64', True)
 import jax.numpy as np
 from jax.scipy.special import gammaln
 from jax.scipy.stats import norm, poisson
+from jax.interpreters.xla import DeviceArray
 import numpy as onp
 import logging
 
@@ -62,7 +63,7 @@ class jax_backend(object):
         """
         Provide the underlying tensor type.
         """
-        return jax.interpreters.xla.DeviceArray
+        return DeviceArray
 
     def clip(self, tensor_in, min_value, max_value):
         """
