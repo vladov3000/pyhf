@@ -1,5 +1,6 @@
 """Module for Maximum Likelihood Estimation."""
 from .. import get_backend
+from ..exceptions import UnspecifiedPOI
 
 
 def twice_nll(pars, data, pdf):
@@ -20,6 +21,10 @@ def twice_nll(pars, data, pdf):
 def fit(data, pdf, init_pars=None, par_bounds=None, **kwargs):
     """
     Run a unconstrained maximum likelihood fit.
+
+    .. note::
+
+        :func:`twice_nll` is the objective function.
 
     Example:
         >>> import pyhf
@@ -53,6 +58,10 @@ def fixed_poi_fit(poi_val, data, pdf, init_pars=None, par_bounds=None, **kwargs)
     """
     Run a maximum likelihood fit with the POI value fixed.
 
+    .. note::
+
+        :func:`twice_nll` is the objective function.
+
     Example:
         >>> import pyhf
         >>> pyhf.set_backend("numpy")
@@ -76,6 +85,10 @@ def fixed_poi_fit(poi_val, data, pdf, init_pars=None, par_bounds=None, **kwargs)
         See optimizer API
 
     """
+    if pdf.config.poi_index is None:
+        raise UnspecifiedPOI(
+            'No POI is defined. A POI is required to fit with a fixed POI.'
+        )
     _, opt = get_backend()
     init_pars = init_pars or pdf.config.suggested_init()
     par_bounds = par_bounds or pdf.config.suggested_bounds()
