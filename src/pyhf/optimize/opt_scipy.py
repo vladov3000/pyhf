@@ -28,7 +28,7 @@ class scipy_optimizer(object):
 
         Returns:
             bestfit parameters
-        
+
         """
         fixed_vals = fixed_vals or []
         indices = [i for i, _ in fixed_vals]

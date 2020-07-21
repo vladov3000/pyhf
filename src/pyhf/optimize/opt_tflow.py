@@ -46,7 +46,7 @@ class tflow_optimizer(AutoDiffOptimizerMixin):
             with tf.GradientTape() as tape:
                 tape.watch(pars)
                 constrained_pars = tv.stitch([fixed_values_tensor, pars])
-                constr_nll = objective(constrained_pars, data, pdf)
+                constr_nll = objective(constrained_pars, data, pdf)[0]
             grad = tape.gradient(constr_nll, pars).values
             return constr_nll.numpy(), grad
 

@@ -16,7 +16,7 @@ class minuit_optimizer(object):
 
         Args:
             verbose (`bool`): print verbose output during minimization
-        
+
         """
         self.verbose = verbose
         self.ncall = ncall
@@ -72,7 +72,7 @@ class minuit_optimizer(object):
 
         Returns:
             bestfit parameters
-        
+
         """
         mm = self._make_minuit(objective, data, pdf, init_pars, par_bounds, fixed_vals)
         result = mm.migrad(ncall=self.ncall)

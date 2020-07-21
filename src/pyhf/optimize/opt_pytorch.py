@@ -45,7 +45,7 @@ class pytorch_optimizer(AutoDiffOptimizerMixin):
             pars = tensorlib.astensor(pars)
             pars.requires_grad = True
             constrained_pars = tv.stitch([fixed_values_tensor, pars])
-            constr_nll = objective(constrained_pars, data, pdf)
+            constr_nll = objective(constrained_pars, data, pdf)[0]
             grad = torch.autograd.grad(constr_nll, pars)[0]
             return constr_nll.detach().numpy(), grad
 
