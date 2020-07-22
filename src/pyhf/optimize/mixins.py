@@ -117,5 +117,5 @@ class OptimizerMixin(object):
                 fitted_uncs = tensorlib.astensor(uncertainties)
             fitted_pars = tensorlib.stack([fitted_pars, fitted_uncs], axis=1)
         if return_fitted_val:
-            return fitted_pars, tensorlib.astensor(fitted_val)
+            return fitted_pars, fitted_val
         return fitted_pars

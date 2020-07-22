@@ -26,6 +26,6 @@ def make_func(objective, data, pdf, build_pars, do_grad=False):
     def func(pars):
         pars = tensorlib.astensor(pars)
         constrained_pars = build_pars(pars)
-        return objective(constrained_pars, data, pdf)
+        return objective(constrained_pars, data, pdf)[0]
 
     return func

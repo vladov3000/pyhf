@@ -32,7 +32,7 @@ def make_func(
             constrained_pars = build_pars(pars)
             constr_nll = objective(constrained_pars, data, pdf)
             grad = torch.autograd.grad(constr_nll, pars)[0]
-            return constr_nll.detach().numpy(), grad
+            return constr_nll.detach().numpy()[0], grad
 
     else:
 
@@ -40,6 +40,6 @@ def make_func(
             pars = tensorlib.astensor(pars)
             constrained_pars = build_pars(pars)
             constr_nll = objective(constrained_pars, data, pdf)
-            return constr_nll
+            return constr_nll[0]
 
     return func
